@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'class.dart';
+int price = 0 , quantity = 0;
+String name ="";
+int index1 = 0;
+List<Item> currentItems = []; // list of item types for storing the previous items
 
 bool validateIndex(int ind){                  // for index valuation while accrssing the enum type                                             //
  
@@ -20,6 +26,14 @@ void printOptions(){                  // show ooption to the user for more choic
   print('0 :for raw');
   print('1:for manufactured');
   print('2 :for imported');
+
+  try{
+     index1 = int.parse(stdin.readLineSync()!);
+  }
+  catch(e){
+    print("INVALID INPUT PLZ ENTER AN INTEGER RANGING (0-2)");
+    index1 = int.parse(stdin.readLineSync()!);
+  }
 }
 
 double priceCalculationOfItems (type t1 , int price , int quantity){
@@ -39,7 +53,7 @@ double priceCalculationOfItems (type t1 , int price , int quantity){
           if( imported <= 100){
             imported += 5;
           }
-          else{if( imported >100 && imported <= 200){
+          else if( imported >100 && imported <= 200){
             imported += 10;
           }
           else if(imported > 200){
@@ -47,7 +61,6 @@ double priceCalculationOfItems (type t1 , int price , int quantity){
           }
 
           currPrice =  imported;
-      }
     }break;
      
     default:{currPrice = 0;}
@@ -58,3 +71,33 @@ double priceCalculationOfItems (type t1 , int price , int quantity){
  }
 
 
+void showPreviousItems(){                     // showing the previous inputs 
+  for(int i =0;i<currentItems.length;i++){
+      print(currentItems[i].itemName );
+      print( currentItems[i].price);
+   }
+}
+
+void takeValidInputFromUser(){               // reading the valid input from the user and validating it
+  try{
+  print('enter the price of item');
+  price = int.parse(stdin.readLineSync()!) ;     /// fundamentally wrong(ek bari try kra to sab try me hona chaie) // never in catck block;
+  }
+  catch(e){
+    print("INVALID INPUT PLZ ENTER  AN INTEGER");
+    price = int.parse(stdin.readLineSync()!) ; 
+  }
+  
+  print('enter the name of item');
+  name = stdin.readLineSync()!;
+  
+  try{
+  print('enter the quantiity of item');
+  quantity = int.parse(stdin.readLineSync()!) ; 
+  }
+  catch(e){
+    print("INVALID INPUT PLZ ENTER  AN INTEGER");
+    quantity = int.parse(stdin.readLineSync()!) ;
+  }
+
+}

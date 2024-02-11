@@ -4,7 +4,7 @@ import 'user.dart';
 import 'funcions.dart';
 
 void main() {
-  User.currentUsers = previousUsers(); //working
+  User.currentUsers = previousUsers();
 
   while (true) {
     printOptions();

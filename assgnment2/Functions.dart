@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'util.dart';
 import 'user.dart';
-
-/// two classes approach (util input, util validation)
 import 'dart:io';
 
 bool validateUserChoice(int userChoice) {
@@ -14,20 +12,21 @@ bool validateUserChoice(int userChoice) {
 }
 
 int takeUserChoice() {
-  int validChoice = Util.validateInteger(); // kya ye valid
+  int validChoice = Util.validateInteger();
 
   while (validateUserChoice(validChoice) == false) {
     validChoice = Util.validateInteger();
+    printOptions();
   }
   return validChoice;
 }
 
 void printOptions() {
   print('Enter the as per options below');
-  print('1:For Adding user details');
-  print('2:Displayng the existing user detaiils');
-  print('3:Deleting the user details');
-  print('4:Saving the user details');
+  print('1:Add user details');
+  print('2:Display the existing user detaiils');
+  print('3:Delete the user details');
+  print('4:Save the user details');
   print('5:Exit');
 }
 

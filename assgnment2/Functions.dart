@@ -15,8 +15,8 @@ int takeUserChoice() {
   int validChoice = Util.validateInteger();
 
   while (validateUserChoice(validChoice) == false) {
-    validChoice = Util.validateInteger();
     printOptions();
+    validChoice = Util.validateInteger();
   }
   return validChoice;
 }

@@ -1,7 +1,8 @@
 import 'dart:io';
-import 'util.dart';
+
+import 'Functions.dart';
+
 import 'user.dart';
-import 'funcions.dart';
 
 void main() {
   User.currentUsers = previousUsers();
@@ -19,7 +20,8 @@ void main() {
         break;
 
       case 2:
-        sortAscondition();
+        int userChoice = SortingOptions();
+        sortAscondition(userChoice);
         displayUser();
         break;
 

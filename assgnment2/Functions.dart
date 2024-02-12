@@ -45,20 +45,12 @@ List<String> readCources() {
   Set<String> currentCources = {};
 
   print('Cources offered are A,B,C,D,E,F');
-
+  print("enter the unique cources offered");
   while (currentCources.length < 4) {
-    print("please  select atleat 4 cources out of 6");
     String cource = stdin.readLineSync()!;
-
-    if (courcesOffered.contains(cource)) {
-      if (currentCources.contains(cource)) {
-        print('Cource already exist enter another on from offeredCources');
-      } else
-        currentCources.add(cource);
-    } else {
-      print('entered cource is not being offered');
-    }
+    if (courcesOffered.contains(cource)) currentCources.add(cource);
   }
+
   print('choosen cources are');
   List<String> courceChosen = [];
 
@@ -68,6 +60,17 @@ List<String> readCources() {
   }
 
   return courceChosen;
+}
+
+int validUserAge() {
+  bool isValid = false;
+  int userAge = 0;
+  while (!isValid) {
+    print('enter the Valid  Age of user');
+    userAge = Util.validateInteger();
+    if (userAge > 0 && userAge < 100) isValid = true;
+  }
+  return userAge;
 }
 
 User readDeatais() {
@@ -86,8 +89,7 @@ User readDeatais() {
   print('enter the address of user');
   userAddress = stdin.readLineSync()!;
 
-  print('enter the Age of user');
-  userAge = Util.validateInteger();
+  userAge = validUserAge();
 
   List<String> userCources = readCources();
 
@@ -103,13 +105,33 @@ void displayUser() {
   if (User.currentUsers.length == 0) {
     print("no registered Users avilable ");
   }
-  for (var user in User.currentUsers) {
-    print(user.userName);
-    print(user.userRollNumber);
+  print("enter 1 for displaying in decending order");
+  int userChoice = Util.validateInteger();
+  if (userChoice != 1) {
+    for (var user in User.currentUsers) {
+      print(user.userName);
+      print(user.userRollNumber);
+    }
+  } else {
+    List<User> reversedUsers = User.currentUsers.reversed.toList();
+    for (var user in reversedUsers) {
+      print(user.userName);
+      print(user.userRollNumber);
+    }
   }
 }
 
-void sortAscondition() {
+void sortonRollNumber() {
+  List<User> currentUsers = User.currentUsers;
+
+  currentUsers.sort((a, b) {
+    return a.userRollNumber
+        .compareTo(b.userRollNumber); // change as per question
+  });
+  User.currentUsers = currentUsers;
+}
+
+void sortOnName() {
   List<User> currentUsers = User.currentUsers;
 
   currentUsers.sort((a, b) {
@@ -119,6 +141,40 @@ void sortAscondition() {
       return a.userRollNumber
           .compareTo(b.userRollNumber); // change as per question
   });
+  User.currentUsers = currentUsers;
+}
+
+void sortOnAge() {
+  List<User> currentUsers = User.currentUsers;
+
+  currentUsers.sort((a, b) {
+    return a.userAge.compareTo(b.userAge); // change as per question
+  });
+  User.currentUsers = currentUsers;
+}
+
+void sortOnAddress() {
+  List<User> currentUsers = User.currentUsers;
+
+  currentUsers.sort((a, b) {
+    return a.userAddress.compareTo(b.userAddress); // change as per question
+  });
+  User.currentUsers = currentUsers;
+}
+
+void sortAscondition(int userChoice) {
+  switch (userChoice) {
+    case 1:
+      sortonRollNumber();
+    case 2:
+      sortOnName();
+    case 3:
+      sortOnAge();
+    case 4:
+      sortOnAddress();
+    default:
+      sortonRollNumber();
+  }
 }
 
 void deleteUser() {
@@ -146,21 +202,52 @@ void saveUserDetails() {
   }
 
   var json = jsonEncode(convertedObjected);
-  File('userdetail.json').writeAsStringSync(jsonEncode(json));
+  File('userdetails.json').writeAsStringSync(jsonEncode(json));
+}
+
+void checkFile() {
+  File file = File('userdetails.json');
+  file.exists().then((exists) {
+    if (exists) {
+      print('File exists.');
+    } else {
+      print('File does not exist. Creating file...');
+      file.create().then((file) {
+        print('File created successfully.');
+      }).catchError((error) {
+        print('Error creating file: $error');
+      });
+    }
+  });
 }
 
 List<User> previousUsers() {
-  String jsonString = File('userdetail.json').readAsStringSync();
+  checkFile();
+  String jsonString = File('userdetails.json').readAsStringSync();
+  if (jsonString.length > 0) {
+    var decodedUserList = json.decode(jsonString);
+    const JsonDecoder decoder = JsonDecoder();
+    var listOfUserAsMap = decoder.convert(decodedUserList);
 
-  var decodedUserList = json.decode(jsonString);
+    List<User> savedUsers = [];
 
-  const JsonDecoder decoder = JsonDecoder();
-  var listOfUserAsMap = decoder.convert(decodedUserList);
+    for (var object in listOfUserAsMap) {
+      savedUsers.add(User.fromJson(object));
+    }
 
-  List<User> savedUsers = [];
+    return savedUsers;
+  } else
+    return [];
+}
 
-  for (var object in listOfUserAsMap) {
-    savedUsers.add(User.fromJson(object));
-  }
-  return savedUsers;
+int SortingOptions() {
+  int validInteger = 0;
+  do {
+    print("enter 1 for sorting on basis of roll number");
+    print("enter 2 for sorting on basis of Name");
+    print("enter 3 for sorting on basis of age");
+    print("enter 4 for sorting on basis of address");
+    validInteger = Util.validateInteger();
+  } while (validInteger < 1 || validInteger > 4);
+  return validInteger;
 }

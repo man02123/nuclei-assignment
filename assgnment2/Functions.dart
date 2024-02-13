@@ -205,14 +205,16 @@ void saveUserDetails() {
   File('userdetails.json').writeAsStringSync(jsonEncode(json));
 }
 
-void checkFile() {
+Future<void> checkFile() async {
+  // ye ache se padhna h important concept hai
   File file = File('userdetails.json');
-  file.exists().then((exists) {
+  await file.exists().then((exists) async {
+    // importent (about then )
     if (exists) {
       print('File exists.');
     } else {
       print('File does not exist. Creating file...');
-      file.create().then((file) {
+      await file.create(recursive: true).then((file) {
         print('File created successfully.');
       }).catchError((error) {
         print('Error creating file: $error');
@@ -221,8 +223,9 @@ void checkFile() {
   });
 }
 
-List<User> previousUsers() {
-  checkFile();
+Future<List<User>> previousUsers() async {
+  // ye phir se padhna h
+  await checkFile();
   String jsonString = File('userdetails.json').readAsStringSync();
   if (jsonString.length > 0) {
     var decodedUserList = json.decode(jsonString);

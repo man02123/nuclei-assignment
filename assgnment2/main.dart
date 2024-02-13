@@ -4,8 +4,8 @@ import 'Functions.dart';
 
 import 'user.dart';
 
-void main() {
-  User.currentUsers = previousUsers();
+void main() async {
+  User.currentUsers = await previousUsers();
 
   while (true) {
     printOptions();

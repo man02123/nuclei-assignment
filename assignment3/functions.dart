@@ -99,12 +99,7 @@ void addGraphDependency() {
       print("both parent and children are NULL");
     }
     return;
-  } //else {
-  //   Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
-  //   Graph.allExistingNodes[children]?.immediateParent.add(nodeId);
-  //   Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
-  //   Graph.allExistingNodes[parent]?.immediateChildren.add(nodeId);
-  // }
+  }
 
   bool c = Graph.cyclicityCheck(nodeId, parent, children);
 

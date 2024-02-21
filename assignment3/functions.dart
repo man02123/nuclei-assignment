@@ -12,7 +12,6 @@ void printOptions() {
   print('6 : Get all the descendants of a node');
   print('7 : Delete a node from tree');
   print('8 : exit');
-  // print('5:Exit');
 }
 
 int takeUserChoice() {

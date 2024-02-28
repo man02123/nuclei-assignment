@@ -1,31 +1,31 @@
-enum Type { raw, manufactured, imported }
+enum ItemType { raw, manufactured, imported }
 
 abstract class Item {
   static List<dynamic> currentItems = [];
 
-  double priceCalculation();
+  double calculateItemPrice();
 
   factory Item(
-      Type itemType, String itemName, int itemPrice, int itemQuantity) {
+      ItemType itemType, String itemName, int itemPrice, int itemQuantity) {
     switch (itemType) {
-      case Type.imported:
+      case ItemType.imported:
         return importedItem(
             itemName: itemName,
             itemPrice: itemPrice,
             itemQuantity: itemQuantity);
 
-      case Type.manufactured:
-        return manufacturedItem(
+      case ItemType.manufactured:
+        return ManufacturedItem(
             itemName: itemName,
             itemPrice: itemPrice,
             itemQuantity: itemQuantity);
-      case Type.raw:
-        return rawItem(
+      case ItemType.raw:
+        return RawItem(
             itemName: itemName,
             itemPrice: itemPrice,
             itemQuantity: itemQuantity);
       default:
-        return rawItem(
+        return RawItem(
             itemName: itemName,
             itemPrice: itemPrice,
             itemQuantity: itemQuantity);
@@ -43,49 +43,55 @@ class importedItem implements Item {
       required this.itemQuantity});
 
   @override
-  double priceCalculation() {
-    double imported =
+  double calculateItemPrice() {
+    double priceOfImportedItem =
         (0.10 * itemPrice) * itemQuantity + itemPrice * itemQuantity;
 
-    if (imported <= 100) {
-      imported += 5;
-    } else if (imported > 100 && imported <= 200) {
-      imported += 10;
-    } else if (imported > 200) {
-      imported = (0.10 * imported) + imported;
+    if (priceOfImportedItem <= 100) {
+      priceOfImportedItem += 5;
+    } else if (priceOfImportedItem > 100 && priceOfImportedItem <= 200) {
+      priceOfImportedItem += 10;
+    } else if (priceOfImportedItem > 200) {
+      priceOfImportedItem = (0.10 * priceOfImportedItem) + priceOfImportedItem;
     }
 
-    return imported;
+    return priceOfImportedItem;
   }
 }
 
-class manufacturedItem implements Item {
+class ManufacturedItem implements Item {
   int itemPrice;
   String itemName;
   int itemQuantity;
-  manufacturedItem(
+  ManufacturedItem(
       {required this.itemName,
       required this.itemPrice,
       required this.itemQuantity});
   @override
-  double priceCalculation() {
-    double p1 = (0.125 * itemPrice) * itemQuantity;
-    return (0.02 * p1) + p1 + itemPrice * itemQuantity;
+  double calculateItemPrice() {
+    double priceOfManufacturedItem = (0.125 * itemPrice) * itemQuantity;
+    return (0.02 * priceOfManufacturedItem) +
+        priceOfManufacturedItem +
+        itemPrice * itemQuantity;
   }
 }
 
-class rawItem implements Item {
+class RawItem implements Item {
   int itemPrice;
   String itemName;
   int itemQuantity;
+  RawItem(
+      {required this.itemName,
+      required this.itemPrice,
+      required this.itemQuantity});
 
   @override
-  double priceCalculation() {
+  double calculateItemPrice() {
     return (0.125 * itemPrice) * itemQuantity + itemPrice * itemQuantity;
   }
 
-  rawItem(
-      {required this.itemName,
-      required this.itemPrice,
-      required this.itemQuantity});
+  @override
+  String toString() {
+    return 'Name: $itemName , ItemPrice : $itemPrice';
+  }
 }

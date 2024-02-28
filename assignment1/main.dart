@@ -6,25 +6,17 @@ void main() {
   while (true) {
     Util.takeValidInputFromUser(); // take valid input from user
 
-    Util.printOptions(); //  give user option to enter an option of corrosponding type
+    int userChoice = Util.takeValidChoice();
 
-    while (Util.validateIndex(Util.index1) == false) {
-      print(
-          ' \nINVALID CHOICE :plz enter a valid choice'); // validating the index
-      print('\n');
-      Util.printOptions();
-    }
-
-    var object = Item(Type.values[Util.index1], Util.name, Util.price,
+    Item item = Item(ItemType.values[userChoice], Util.name, Util.price,
         Util.quantity); // creating the object {of ite type}
     double finalPrice =
-        object.priceCalculation(); // calculating the final price for the item
+        item.calculateItemPrice(); // calculating the final price for the item
 
-    print('item name   ${Util.name}');
-    print('item price  ${finalPrice}');
+    print(' ${item.toString()}');
 
     Item.currentItems.add(
-        object); // storing the item to a list so that user can see the previous items
+        item); // storing the item to a list so that user can see the previous items
 
     print('do you want to see previous item? (y/n)');
     String option1 = stdin.readLineSync()!;

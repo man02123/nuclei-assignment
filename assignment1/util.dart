@@ -4,32 +4,25 @@ import 'class.dart';
 class Util {
   static int price = 0, quantity = 0;
   static String name = "";
-  static int index1 = 0;
 
-  static bool validateIndex(int ind) {
-    // for index valuation while accrssing the enum type                                             //
-
-    if (ind < 0 || ind >= 3) return false;
-    return true;
-  }
-
-  static void printOptions() {
-    // show ooption to the user for more choices
+  static int takeValidChoice() {
     print('enter the type of item');
     print('0 :for raw');
     print('1:for manufactured');
     print('2 :for imported');
 
     bool isValid = false;
-    while (!isValid) {
+    int validIndex = 0;
+    while (!isValid && (validIndex < 0 || validIndex >= 3)) {
       try {
-        index1 = int.parse(stdin.readLineSync()!);
+        validIndex = int.parse(stdin.readLineSync()!);
         isValid = true;
       } catch (e) {
         print("INVALID INPUT PLZ ENTER AN INTEGER RANGING (0-2)");
         isValid = false;
       }
     }
+    return validIndex;
   }
 
   static bool addMoreItem(String? option) {
@@ -50,7 +43,6 @@ class Util {
         print('enter the price of item');
         price = int.parse(stdin.readLineSync()!);
 
-        /// fundamentally wrong(ek bari try kra to sab try me hona chaie) // never in catck block;
         validPrice = true;
       } catch (e) {
         print("INVALID INPUT PLZ ENTER  AN INTEGER");
@@ -76,8 +68,7 @@ class Util {
   static void showPreviousItems() {
     // showing the previous inputs
     for (int i = 0; i < Item.currentItems.length; i++) {
-      print(Item.currentItems[i].itemName);
-      print(Item.currentItems[i].itemPrice);
+      print('${Item.currentItems[i].toString()}');
     }
   }
 }

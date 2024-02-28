@@ -2,6 +2,12 @@ enum ItemType { raw, manufactured, imported }
 
 abstract class Item {
   static List<dynamic> currentItems = [];
+  static void showPreviousItems() {
+    // showing the previous inputs
+    for (int i = 0; i < Item.currentItems.length; i++) {
+      print('${Item.currentItems[i].toString()}');
+    }
+  }
 
   double calculateItemPrice();
 
@@ -9,7 +15,7 @@ abstract class Item {
       ItemType itemType, String itemName, int itemPrice, int itemQuantity) {
     switch (itemType) {
       case ItemType.imported:
-        return importedItem(
+        return ImportedItem(
             itemName: itemName,
             itemPrice: itemPrice,
             itemQuantity: itemQuantity);
@@ -33,11 +39,11 @@ abstract class Item {
   }
 }
 
-class importedItem implements Item {
+class ImportedItem implements Item {
   int itemPrice;
   String itemName;
   int itemQuantity;
-  importedItem(
+  ImportedItem(
       {required this.itemName,
       required this.itemPrice,
       required this.itemQuantity});

@@ -22,7 +22,7 @@ void main() {
     String option1 = stdin.readLineSync()!;
     if (option1 == 'y') {
       // option for the user to see the prevoius items
-      Util.showPreviousItems();
+      Item.showPreviousItems();
     }
 
     print(

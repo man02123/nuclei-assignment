@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'util.dart';
+import 'functions.dart';
 
 class Graph {
   int nodeId = 0;
@@ -119,5 +121,51 @@ class Graph {
     }
 
     return visited;
+  }
+
+  static void addGraphDependency() {
+    print("for no parent or child enter -1 respectively");
+    int nodeId = readExistingNode();
+    print("enter the parent of node");
+    int parent = Util.validUserInput();
+
+    if (parent != -1 && !Graph.uniqueId.contains(parent)) {
+      print("parent is not present dependency Cant be added");
+      return;
+    }
+
+    print("enter the child of node");
+    int children = Util.validUserInput();
+
+    if (children != -1 && !Graph.uniqueId.contains(children)) {
+      print("children is not present dependency Cant be added");
+      return;
+    }
+
+    if (parent == -1 || children == -1) {
+      if (parent == -1 && children != -1) {
+        Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
+        Graph.allExistingNodes[children]?.immediateParent.add(nodeId);
+        print('dependecy established between ${nodeId} -> ${children}');
+      } else if (parent != -1 && children == -1) {
+        Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
+        Graph.allExistingNodes[parent]?.immediateChildren.add(nodeId);
+        print('dependecy established between ${parent} -> ${nodeId}');
+      } else {
+        print("both parent and children are NULL");
+      }
+      return;
+    }
+
+    bool c = Graph.cyclicityCheck(nodeId, parent, children);
+
+    if (c == false) {
+      Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
+      Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
+      print(
+          "dependency sucessfully added between parent: ${parent} -> Node:${nodeId} -> child${children}");
+    } else {
+      print("dependency cant be cyclic : error message ");
+    }
   }
 }

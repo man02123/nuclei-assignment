@@ -17,7 +17,7 @@ void main() {
         break;
 
       case 2:
-        addGraphDependency();
+        Graph.addGraphDependency();
         break;
 
       case 3:

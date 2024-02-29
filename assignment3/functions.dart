@@ -15,21 +15,21 @@ void printOptions() {
 }
 
 int takeUserChoice() {
-  int validChoice = Util.validateInteger();
+  int validChoice = Util.validUserInput();
 
   while (validateUserChoice(validChoice) == false) {
     printOptions();
-    validChoice = Util.validateInteger();
+    validChoice = Util.validUserInput();
   }
   return validChoice;
 }
 
 int validGraphId() {
-  int isValid = Util.validateInteger();
+  int isValid = Util.validUserInput();
 
   while (Graph.uniqueId.contains(isValid)) {
     print('please enter a unique graph Id');
-    isValid = Util.validateInteger();
+    isValid = Util.validUserInput();
   }
   return isValid;
 }
@@ -58,7 +58,7 @@ int readExistingNode() {
   int existigNode = -1;
   while (!isValid) {
     print('enter the node whoose dependency has to be added');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }
@@ -66,58 +66,12 @@ int readExistingNode() {
   return existigNode;
 }
 
-void addGraphDependency() {
-  print("for no parent or child enter -1 respectively");
-  int nodeId = readExistingNode();
-  print("enter the parent of node");
-  int parent = Util.validateInteger();
-
-  if (parent != -1 && !Graph.uniqueId.contains(parent)) {
-    print("parent is not present dependency Cant be added");
-    return;
-  }
-
-  print("enter the child of node");
-  int children = Util.validateInteger();
-
-  if (children != -1 && !Graph.uniqueId.contains(children)) {
-    print("children is not present dependency Cant be added");
-    return;
-  }
-
-  if (parent == -1 || children == -1) {
-    if (parent == -1 && children != -1) {
-      Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
-      Graph.allExistingNodes[children]?.immediateParent.add(nodeId);
-      print('dependecy established between ${nodeId} -> ${children}');
-    } else if (parent != -1 && children == -1) {
-      Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
-      Graph.allExistingNodes[parent]?.immediateChildren.add(nodeId);
-      print('dependecy established between ${parent} -> ${nodeId}');
-    } else {
-      print("both parent and children are NULL");
-    }
-    return;
-  }
-
-  bool c = Graph.cyclicityCheck(nodeId, parent, children);
-
-  if (c == false) {
-    Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
-    Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
-    print(
-        "dependency sucessfully added between parent: ${parent} -> Node:${nodeId} -> child${children}");
-  } else {
-    print("dependency cant be cyclic : error message ");
-  }
-}
-
 void getImmediateParents() {
   bool isValid = false;
   int existigNode = -1;
   while (!isValid) {
     print('enter the node whoose immidiate parent need to be displayed');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }
@@ -130,7 +84,7 @@ void getImmediateChildrens() {
   int existigNode = -1;
   while (!isValid) {
     print('enter the node whoose immidiate children need to be displayed');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }
@@ -143,7 +97,7 @@ void getAllAncesters() {
   int existigNode = -1;
   while (!isValid) {
     print('enter the node whoose ancestor  are to be displayed');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }
@@ -156,7 +110,7 @@ void getAllDecendents() {
   int existigNode = -1;
   while (!isValid) {
     print('enter the node whoose ancestor  are to be displayed');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }
@@ -169,7 +123,7 @@ void deleteNode() {
   int existigNode = -1;
   while (!isValid) {
     print('enter the node  to be deleted ');
-    existigNode = Util.validateInteger();
+    existigNode = Util.validUserInput();
     if (Graph.uniqueId.contains(existigNode)) {
       isValid = true;
     }

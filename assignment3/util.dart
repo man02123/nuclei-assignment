@@ -1,9 +1,9 @@
 import 'dart:io';
 
 class Util {
-  static int validateInteger() {
+  static int validUserInput() {
     bool validInteger = false;
-    int? userInput;
+    late int userInput;
     while (!validInteger) {
       try {
         userInput = int.parse(stdin.readLineSync()!);
@@ -13,6 +13,6 @@ class Util {
         validInteger = false;
       }
     }
-    return userInput ?? 0;
+    return userInput;
   }
 }

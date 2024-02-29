@@ -5,7 +5,7 @@ import 'Functions.dart';
 import 'user.dart';
 
 void main() async {
-  User.currentUsers = await previousUsers();
+  User.currentUsers = await User.previousUsers();
 
   while (true) {
     printOptions();
@@ -13,7 +13,7 @@ void main() async {
 
     switch (validChoice) {
       case 1:
-        User user = readDeatais();
+        User user = User.readDeatais();
         User.currentUsers.add(user);
         User.regieteredRollNumber.add(user.userRollNumber);
 
@@ -21,15 +21,15 @@ void main() async {
 
       case 2:
         int userChoice = SortingOptions();
-        sortAscondition(userChoice);
-        displayUser();
+        User.sortAscondition(userChoice);
+        User.displayUser();
         break;
 
       case 3:
-        deleteUser();
+        User.deleteUser();
         break;
       case 4:
-        saveUserDetails();
+        User.saveUserDetails();
         break;
       case 5:
         exit(0);

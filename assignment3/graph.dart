@@ -157,9 +157,9 @@ class Graph {
       return;
     }
 
-    bool c = Graph.cyclicityCheck(nodeId, parent, children);
+    bool isCyclic = Graph.cyclicityCheck(nodeId, parent, children);
 
-    if (c == false) {
+    if (isCyclic == false) {
       Graph.allExistingNodes[nodeId]?.immediateChildren.add(children);
       Graph.allExistingNodes[nodeId]?.immediateParent.add(parent);
       print(

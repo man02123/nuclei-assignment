@@ -4,7 +4,7 @@ import 'graph.dart';
 
 void main() {
   test('i want to test graph Class', () {
-    Graph testGraph = Graph(nodeId: 1, nodeName: "A");
+    Node testGraph = Node(nodeId: 1, nodeName: "A");
 
     String result = testGraph.nodeName;
 
@@ -12,7 +12,7 @@ void main() {
   });
 
   test('i want to test Immediate parents  user', () {
-    Graph testGraph = Graph(nodeId: 2, nodeName: "B");
+    Node testGraph = Node(nodeId: 2, nodeName: "B");
     getAllAncesters();
   });
 }

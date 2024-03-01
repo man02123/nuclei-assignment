@@ -12,12 +12,12 @@ void main() {
 
     switch (validChoice) {
       case 1:
-        Graph user = createNewNode();
-        Graph.allExistingNodes[user.nodeId] = user;
+        Node user = createNewNode();
+        Node.allExistingNodes[user.nodeId] = user;
         break;
 
       case 2:
-        Graph.addGraphDependency();
+        Node.addGraphDependency();
         break;
 
       case 3:

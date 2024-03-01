@@ -2,7 +2,8 @@ import 'package:test/test.dart';
 import 'class.dart';
 
 void main() {
-  test('i want to test price calculation for raw material', () {
+  group("price calculation of Raw Item"){
+  test('test to check price calculation of Raw Material', () {
     Item rawItemtoTest = Item(
         itemName: 'testitem1',
         itemPrice: 10,
@@ -16,7 +17,7 @@ void main() {
   });
 
   test(
-      'i want to test price calculation for imported material: case when price < 100',
+      ' test to check price calculation for imported material: case when price < 100',
       () {
     Item importedItemToTest = Item(
         itemName: 'testitem2',
@@ -28,6 +29,7 @@ void main() {
 
     expect(result, 60);
   });
+  }
 
   test(
       'i want to test price calculation for imported material: case when price > 100 && price <= 200',

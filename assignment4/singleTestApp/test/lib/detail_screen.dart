@@ -1,10 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test/Mycontroller.dart';
-
-var controller = Get.put(Mycontroller());
 
 class ContactDetails extends StatefulWidget {
   int index;
@@ -17,6 +14,7 @@ class ContactDetails extends StatefulWidget {
 class _ContactDetailsState extends State<ContactDetails> {
   int index;
   _ContactDetailsState({required this.index});
+  final controller = Get.find<Mycontroller>();
 
   TextEditingController nameController = TextEditingController(),
       lastNameController = TextEditingController(),
@@ -33,7 +31,6 @@ class _ContactDetailsState extends State<ContactDetails> {
         text: controller.rxContacts[index].phones?[0].value);
   }
 
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +42,7 @@ class _ContactDetailsState extends State<ContactDetails> {
           padding: EdgeInsets.all(16.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
+            const Text(
               'Name:',
               style: TextStyle(fontSize: 16),
             ),
@@ -56,7 +53,7 @@ class _ContactDetailsState extends State<ContactDetails> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
+            const Text(
               'Contact Number:',
               style: TextStyle(fontSize: 16),
             ),
@@ -68,7 +65,7 @@ class _ContactDetailsState extends State<ContactDetails> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
+            const Text(
               'Last Name:',
               style: TextStyle(fontSize: 16),
             ),
@@ -80,27 +77,30 @@ class _ContactDetailsState extends State<ContactDetails> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 100, top: 50),
+              padding: EdgeInsets.only(left: 140, top: 50),
               child: ElevatedButton(
                 onPressed: () {
                   String name = nameController.text;
                   String contactVal = contactController.text;
                   String lastName = lastNameController.text;
-                  print(name);
                   Contact contact = Contact(
                       displayName: name,
+                      givenName: name,
                       phones: [Item(value: contactVal)],
                       familyName: lastName);
+                  contact.identifier =
+                      controller.rxContacts[index].givenName = name;
+                  controller.rxContacts[index].givenName = name;
                   controller.rxContacts[index].displayName = name;
                   controller.rxContacts[index].phones?[0].value = contactVal;
                   controller.rxContacts[index].familyName = lastName;
                   controller.rxContacts.refresh();
                   controller.updateContact(controller.rxContacts[index]);
                 },
-                style: ButtonStyle(
+                style: const ButtonStyle(
                   alignment: AlignmentDirectional.center,
                 ),
-                child: Text('Save Changes'),
+                child: const Text('Save'),
               ),
             ),
           ]),

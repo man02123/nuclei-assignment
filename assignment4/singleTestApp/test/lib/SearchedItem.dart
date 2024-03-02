@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import 'Mycontroller.dart';
 import 'detail_screen.dart';
@@ -19,22 +18,20 @@ class SearchedItem extends StatefulWidget {
 class _SearchedItemState extends State<SearchedItem> {
   List<Contact> contacts;
 
-  var controller = Get.put(Mycontroller());
+  final controller = Get.find<Mycontroller>();
   _SearchedItemState({required this.contacts});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Search Contact '),
+          title: const Text('Search Contact '),
         ),
         body: SingleChildScrollView(
             child: Column(children: [
           ListView.builder(
-              // (bhut important concept hai gesture consume hone ka isme)
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: contacts
-                  .length, // (yaha pe value ni likha to bhi kam kega not for alwa)
+              itemCount: contacts.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -52,7 +49,7 @@ class _SearchedItemState extends State<SearchedItem> {
                         onPressed: () {
                           controller.deleteContact(index);
                         },
-                        child: Text('Delete'),
+                        child: Text('delete'),
                       ),
                     ),
                     leading: Container(
@@ -80,7 +77,7 @@ class _SearchedItemState extends State<SearchedItem> {
                       '${contacts[index].displayName ?? "no name"}',
                       maxLines: 1, // overflow na ho jaye line ka
                       overflow: TextOverflow.ellipsis, // pata ni kya karta h
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: 'italic',
                           fontSize: 25,
                           color: Colors.greenAccent,
@@ -88,7 +85,7 @@ class _SearchedItemState extends State<SearchedItem> {
                     ),
                     subtitle: Text(
                       '${contacts[index].phones?[0].value ?? '00'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'bold',
                         fontSize: 18,
                         fontWeight: FontWeight.w400,

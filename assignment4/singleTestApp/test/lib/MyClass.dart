@@ -10,8 +10,6 @@ import 'package:test/new_contact.dart';
 
 import 'SearchedItem.dart';
 
-// statelesss bana k use future builder(no stateful widget)
-
 class MyClass extends StatelessWidget {
   MyClass({super.key});
   var controller = Get.put(Mycontroller());
@@ -20,24 +18,14 @@ class MyClass extends StatelessWidget {
     String value = '';
     final TextEditingController searchController = TextEditingController();
     return FutureBuilder(
-        future: controller
-            .getContact(), // yahi h injection ab mera controller is file me aa gya(imp)
+        future: controller.getContact(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           return SingleChildScrollView(
             child: Column(
               children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        // sidhe controller hi pass kr lunga
-                        context,
-                        MaterialPageRoute(builder: (context) => AddContact()),
-                      );
-                    },
-                    child: const Text('Add')),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
@@ -62,9 +50,8 @@ class MyClass extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        //(named route use krna)
                                         builder: (
-                                      context, // router se data pass karao
+                                      context,
                                     ) =>
                                             SearchedItem(contacts: contact)),
                                   );
@@ -76,16 +63,28 @@ class MyClass extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             )),
                       ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: FloatingActionButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddContact()));
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Icon(Icons.add),
+                        ),
+                      )
                     ],
                   ),
                 ),
                 Obx(
                   () => ListView.builder(
-                      // (bhut important concept hai gesture consume hone ka isme)
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.rxContacts
-                          .length, // (yaha pe value ni likha to bhi kam kega not for alwa)
+                      itemCount: controller.rxContacts.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
@@ -93,8 +92,6 @@ class MyClass extends StatelessWidget {
                                 MaterialPageRoute(builder: (context) {
                               return ContactDetails(index: index);
                             }));
-
-                            //print('tapped');
                           },
                           child: ListTile(
                             trailing: Container(
@@ -102,7 +99,7 @@ class MyClass extends StatelessWidget {
                                 onPressed: () {
                                   controller.deleteContact(index);
                                 },
-                                child: Text('Delete'),
+                                child: const Icon(Icons.delete),
                               ),
                             ),
                             leading: Container(
@@ -117,7 +114,7 @@ class MyClass extends StatelessWidget {
                                 )
                               ], borderRadius: BorderRadius.circular(6)),
                               child: Text(
-                                '${controller.rxContacts.value[index].displayName?[0]} ',
+                                '${controller.rxContacts[index].displayName?[0]} ',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -127,19 +124,20 @@ class MyClass extends StatelessWidget {
                               ),
                             ),
                             title: Text(
-                              '${controller.rxContacts.value[index].displayName ?? "no name"}',
-                              maxLines: 1, // overflow na ho jaye line ka
-                              overflow:
-                                  TextOverflow.ellipsis, // pata ni kya karta h
-                              style: TextStyle(
+                              controller.rxContacts[index].displayName ??
+                                  "no name",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
                                   fontFamily: 'italic',
                                   fontSize: 25,
                                   color: Colors.greenAccent,
                                   fontWeight: FontWeight.w600),
                             ),
                             subtitle: Text(
-                              '${controller.rxContacts[index].phones?[0].value ?? '00'}',
-                              style: TextStyle(
+                              controller.rxContacts[index].phones?[0].value ??
+                                  '00',
+                              style: const TextStyle(
                                 fontFamily: 'bold',
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,

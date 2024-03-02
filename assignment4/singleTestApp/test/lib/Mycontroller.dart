@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Mycontroller extends GetxController {
-  RxList<Contact> rxContacts =
-      <Contact>[].obs; // (ye method se familiar ho jaun )
+  RxList<Contact> rxContacts = <Contact>[].obs;
 
   Future<void> check() async {
-    var status = await Permission
-        .contacts.status; // manually band krne pe error hai (solve??)
+    var status = await Permission.contacts.status;
 
     if (status.isGranted) {
       print('granted');
@@ -23,7 +21,6 @@ class Mycontroller extends GetxController {
   Future<void> addNewContact(Contact newContact) async {
     rxContacts.add(newContact);
     await ContactsService.addContact(newContact);
-
     rxContacts.refresh();
   }
 
@@ -33,24 +30,12 @@ class Mycontroller extends GetxController {
   }
 
   Future<void> getContact() async {
-    var t = (await ContactsService.getContacts());
-    rxContacts = t.obs;
-  }
-
-  @override
-  void onInit() async {
-    print('initialized');
-    super.onInit();
-    await check();
-    await getContact();
+    rxContacts = (await ContactsService.getContacts()).obs;
   }
 
   Future<void> deleteContact(index) async {
-    await ContactsService.deleteContact(rxContacts.value[index]);
-
-    rxContacts.value.remove(rxContacts.value[index]);
-
-    rxContacts
-        .refresh(); //( kabhi kabhi obx sahi se kam ni krta hai even in the main project isse error aya tha)
+    await ContactsService.deleteContact(rxContacts[index]);
+    rxContacts.remove(rxContacts[index]);
+    rxContacts.refresh();
   }
 }

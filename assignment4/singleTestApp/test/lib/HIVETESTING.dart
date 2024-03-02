@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:test/MyClass.dart';
-import 'package:test/contact_layout.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

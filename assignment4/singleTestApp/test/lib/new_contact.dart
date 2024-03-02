@@ -13,35 +13,34 @@ class AddContact extends StatelessWidget {
   final controller = Get.find<Mycontroller>();
   @override
   Widget build(BuildContext context) {
-    // isko upar likte hi galat ho ja rha h
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add new Contact'),
+          title: const Text('Add new Contact'),
         ),
         body: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Name:',
                   style: TextStyle(fontSize: 16),
                 ),
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your name',
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Contact Number:',
                   style: TextStyle(fontSize: 16),
                 ),
                 TextField(
                   controller: contactController,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your contact number',
                   ),
                 ),
@@ -52,13 +51,14 @@ class AddContact extends StatelessWidget {
 
                     Contact newContact = Contact(
                         displayName: name,
+                        givenName: name,
                         phones: [Item(value: contact.toString())]);
 
                     await controller.addNewContact(newContact);
                     controller.rxContacts.refresh();
                     print('contact added');
                   },
-                  child: Text('Add contact'),
+                  child: const Text('Add contact'),
                 )
               ],
             )));

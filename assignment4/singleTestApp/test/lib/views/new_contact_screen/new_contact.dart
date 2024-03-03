@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:test/Mycontroller.dart';
+import 'package:test/controller/getx_controller.dart';
 
 class AddContact extends StatelessWidget {
   //var controller;

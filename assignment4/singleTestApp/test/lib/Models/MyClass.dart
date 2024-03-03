@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:test/Mycontroller.dart';
-import 'package:test/detail_screen.dart';
-import 'package:test/new_contact.dart';
+import 'package:test/controller/getx_controller.dart';
+import 'package:test/views/detail_screen/detail_screen.dart';
+import 'package:test/views/new_contact_screen/new_contact.dart';
 
-import 'SearchedItem.dart';
+import '../views/search_screen/SearchedItem.dart';
 
 class MyClass extends StatelessWidget {
   MyClass({super.key});

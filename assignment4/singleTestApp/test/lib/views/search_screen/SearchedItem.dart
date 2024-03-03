@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'Mycontroller.dart';
-import 'detail_screen.dart';
+import '../../controller/getx_controller.dart';
+import '../detail_screen/detail_screen.dart';
 
 class SearchedItem extends StatefulWidget {
   List<Contact> contacts;

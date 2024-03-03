@@ -1,7 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test/Mycontroller.dart';
+import 'package:test/controller/getx_controller.dart';
 
 class ContactDetails extends StatefulWidget {
   int index;

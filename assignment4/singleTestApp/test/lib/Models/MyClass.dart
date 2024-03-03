@@ -1,5 +1,4 @@
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -43,9 +42,13 @@ class MyClass extends StatelessWidget {
 
                                   Iterable<Contact> contacts =
                                       await contactsFuture;
+
                                   List<Contact> contact = [];
-                                  for (var currentContact in contacts)
-                                    contact.add(currentContact);
+                                  controller.query_Contacts.clear();
+                                  for (var currentContact in contacts) {
+                                    controller.query_Contacts
+                                        .add(currentContact);
+                                  }
 
                                   Navigator.push(
                                     context,
@@ -53,18 +56,20 @@ class MyClass extends StatelessWidget {
                                         builder: (
                                       context,
                                     ) =>
-                                            SearchedItem(contacts: contact)),
+                                            SearchedItem(
+                                                contacts:
+                                                    controller.query_Contacts)),
                                   );
                                 },
-                                child: Icon(Icons.search)),
-                            contentPadding: EdgeInsets.symmetric(
+                                child: const Icon(Icons.search)),
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 5),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             )),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: FloatingActionButton(
                           onPressed: () {
                             Navigator.push(
@@ -74,7 +79,7 @@ class MyClass extends StatelessWidget {
                           },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          child: Icon(Icons.add),
+                          child: const Icon(Icons.add),
                         ),
                       )
                     ],
@@ -82,7 +87,7 @@ class MyClass extends StatelessWidget {
                 ),
                 Obx(
                   () => ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: controller.rxContacts.length,
                       itemBuilder: (context, index) {
@@ -94,13 +99,11 @@ class MyClass extends StatelessWidget {
                             }));
                           },
                           child: ListTile(
-                            trailing: Container(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  controller.deleteContact(index);
-                                },
-                                child: const Icon(Icons.delete),
-                              ),
+                            trailing: ElevatedButton(
+                              onPressed: () {
+                                controller.deleteContact(index);
+                              },
+                              child: const Icon(Icons.delete),
                             ),
                             leading: Container(
                               height: 50,
@@ -108,18 +111,21 @@ class MyClass extends StatelessWidget {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.7),
-                                  blurRadius: 3,
+                                  color: Colors.black.withOpacity(1.0),
                                   offset: const Offset(3, 3),
                                 )
                               ], borderRadius: BorderRadius.circular(6)),
-                              child: Text(
-                                '${controller.rxContacts[index].displayName?[0]} ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'poppins',
-                                  color: Colors.white.withOpacity(0.8),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.only(
+                                    top: 5, start: 8),
+                                child: Text(
+                                  '${controller.rxContacts[index].displayName?[0]} ${controller.rxContacts[index].familyName?[0] ?? 'N'} ',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'poppins',
+                                    color: Colors.white.withOpacity(0.8),
+                                  ),
                                 ),
                               ),
                             ),
@@ -138,10 +144,10 @@ class MyClass extends StatelessWidget {
                               controller.rxContacts[index].phones?[0].value ??
                                   '00',
                               style: const TextStyle(
-                                fontFamily: 'bold',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
+                                  fontFamily: 'bold',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.grey),
                             ),
                           ),
                         );

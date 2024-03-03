@@ -35,11 +35,11 @@ class _ContactDetailsState extends State<ContactDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Contact Details'),
+          title: const Text('Contact Details'),
           centerTitle: true,
         ),
         body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text(
@@ -52,7 +52,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                 hintText: '${controller.rxContacts[index].displayName}',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'Contact Number:',
               style: TextStyle(fontSize: 16),
@@ -64,7 +64,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                 hintText: '${controller.rxContacts[index].phones?[0].value}',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'Last Name:',
               style: TextStyle(fontSize: 16),
@@ -73,7 +73,7 @@ class _ContactDetailsState extends State<ContactDetails> {
               controller: lastNameController,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
-                hintText: '${controller.rxContacts[index].familyName ?? 'NA'}',
+                hintText: controller.rxContacts[index].familyName ?? 'NA',
               ),
             ),
             Padding(

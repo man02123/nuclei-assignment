@@ -4,14 +4,16 @@ import 'package:permission_handler/permission_handler.dart';
 
 class Mycontroller extends GetxController {
   RxList<Contact> rxContacts = <Contact>[].obs;
+  RxList<Contact> query_Contacts = <Contact>[].obs;
 
   Future<void> check() async {
     var status = await Permission.contacts.status;
 
     if (status.isGranted) {
       print('granted');
-    } else
+    } else {
       await Permission.contacts.request();
+    }
   }
 
   Future<void> updateContact(contact) async {

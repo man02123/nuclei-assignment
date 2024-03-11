@@ -118,12 +118,12 @@ class User {
 
     print('enter the Roll number of user');
 
-    userRollNumber = validRollNumber();
+    userRollNumber = Functions.validRollNumber();
 
     print('enter the address of user');
     userAddress = stdin.readLineSync()!;
 
-    userAge = validUserAge();
+    userAge = Functions.validUserAge();
 
     List<String> userCources = readCources();
 

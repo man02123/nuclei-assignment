@@ -32,7 +32,7 @@ void main() {
   }
 
   test(
-      'i want to test price calculation for imported material: case when price > 100 && price <= 200',
+      'test of price calculation for imported material: case when price > 100 && price <= 200',
       () {
     Item importedItemToTest = Item(
         itemName: 'testitem3',
@@ -46,7 +46,7 @@ void main() {
   });
 
   test(
-      'i want to test price calculation for imported material: case when price > 200',
+      'test of price calculation for imported material: case when price > 200',
       () {
     Item importedItemToTest = Item(
         itemName: 'testitem4',
@@ -60,7 +60,7 @@ void main() {
   });
 
   test(
-      'i want to test price calculation for imported material: case when price > 200',
+      'test of price calculation for imported material: case when price > 200',
       () {
     Item importedItemToTest = Item(
         itemName: 'testitem5',
@@ -72,4 +72,45 @@ void main() {
 
     expect(result, 242);
   });
+
+  test(
+      'test of object instansiation of imported item',
+      () {
+    Item importedItemToTest = Item(
+        itemName: 'testitem5',
+        itemPrice: 10,
+        itemQuantity: 20,
+        itemType: ItemType.raw);
+
+    String result = importedItemToTest.itemName;
+
+    expect(result, 'testitem5');
+  });
+
+  test(
+      'test of object instansiation of manufactured item',
+      () {
+    Item manufacturedItemToTest = Item(
+        itemName: 'testitem6',
+        itemPrice: 10,
+        itemQuantity: 20,
+        itemType: ItemType.manufactured);
+
+    String result = manufacturedItemToTest.itemName;
+
+    expect(result, 'testitem6');
+  });
+
+   test(
+      'test of add new item function',
+      () {
+
+   String result  = Util.addMoreItem('x')
+
+    expect(result, 'Invalid choice by the User');
+  });
+
+
+
+
 }

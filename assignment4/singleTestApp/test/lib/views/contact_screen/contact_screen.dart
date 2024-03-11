@@ -7,7 +7,7 @@ import 'package:test/controller/getx_controller.dart';
 import 'package:test/views/detail_screen/detail_screen.dart';
 import 'package:test/views/new_contact_screen/new_contact.dart';
 
-import '../views/search_screen/SearchedItem.dart';
+import '../search_screen/SearchedItem.dart';
 
 class MyClass extends StatelessWidget {
   MyClass({super.key});
@@ -116,7 +116,7 @@ class MyClass extends StatelessWidget {
                                 )
                               ], borderRadius: BorderRadius.circular(6)),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.only(
+                                padding: const EdgeInsetsDirectional.only(
                                     top: 5, start: 8),
                                 child: Text(
                                   '${controller.rxContacts[index].displayName?[0]} ${controller.rxContacts[index].familyName?[0] ?? 'N'} ',

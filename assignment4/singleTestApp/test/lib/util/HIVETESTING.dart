@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:test/Models/MyClass.dart';
+import 'package:test/views/contact_screen/contact_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.lime, fontSize: 30),
         ),
       ),
-      body: MyClass(),
+      body: ContactScreen(),
     );
   }
 }

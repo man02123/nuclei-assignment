@@ -6,7 +6,7 @@ class Mycontroller extends GetxController {
   RxList<Contact> rxContacts = <Contact>[].obs;
   RxList<Contact> query_Contacts = <Contact>[].obs;
 
-  Future<void> check() async {
+  Future<void> checkPermission() async {
     var status = await Permission.contacts.status;
 
     if (status.isGranted) {

@@ -1,13 +1,10 @@
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:test/controller/getx_controller.dart';
 
-class AddContact extends StatelessWidget {
-  //var controller;
-  AddContact({super.key});
+class AddNewContact extends StatelessWidget {
+  AddNewContact({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController contactController = TextEditingController();
   final controller = Get.find<Mycontroller>();

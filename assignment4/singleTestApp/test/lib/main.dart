@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:test/Models/MyClass.dart';
+import 'package:test/views/contact_screen/contact_screen.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -23,7 +23,11 @@ class MyApp extends StatelessWidget {
           style: TextStyle(color: Colors.lime, fontSize: 30),
         ),
       ),
-      body: MyClass(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Text('add'),
+      ),
+      body: ContactScreen(),
     ));
   }
 }

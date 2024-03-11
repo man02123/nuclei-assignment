@@ -9,8 +9,8 @@ import 'package:test/views/new_contact_screen/new_contact.dart';
 
 import '../search_screen/SearchedItem.dart';
 
-class MyClass extends StatelessWidget {
-  MyClass({super.key});
+class ContactScreen extends StatelessWidget {
+  ContactScreen({super.key});
   var controller = Get.put(Mycontroller());
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class MyClass extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddContact()));
+                                    builder: (context) => AddNewContact()));
                           },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),

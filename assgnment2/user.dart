@@ -140,11 +140,21 @@ class User {
       print("no registered Users avilable ");
     }
     print("enter 1 for displaying in decending order");
+    print('enter 2 to display the particular student');
     int userChoice = Util.validIntegerInput();
     if (userChoice != 1) {
       for (var user in User.currentUsers) {
         print(user.userName);
         print(user.userRollNumber);
+      }
+    } else if (userChoice == 2) {
+      int rollNo = Util.validIntegerInput();
+
+      List<User> reversedUsers = User.currentUsers.reversed.toList();
+      for (var user in reversedUsers) {
+        if (rollNo == user.userRollNumber) print(user.userName);
+        print(user.userRollNumber);
+        break;
       }
     } else {
       List<User> reversedUsers = User.currentUsers.reversed.toList();

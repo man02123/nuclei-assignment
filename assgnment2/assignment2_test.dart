@@ -3,7 +3,7 @@ import 'Functions.dart';
 import 'user.dart';
 
 void main() {
-  test('i want to test User Class', () {
+  test('test  User Class', () {
     User testUser = User(
         userName: 'user1',
         userAddress: 'kanpur',
@@ -16,15 +16,16 @@ void main() {
     expect(result, 'kanpur');
   });
 
-  test('i want to test Delete user', () {
+  test(' test to check Delete user', () {
     User testUser2 = User(
         userName: 'user2',
         userAddress: 'kanpur',
         userAge: 5,
         userCources: ['A', 'B', 'C', 'E'],
-        userRollNumber: 10);
+        userRollNumber: 2);
 
-    deleteUser();
+    string result = deleteUser(2);
+    expect(result , user deleted with roll number 2 : name })
   });
 
   test('i want to test sorting of  user(on Roll no)', () {

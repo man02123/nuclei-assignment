@@ -8,8 +8,8 @@ void main() async {
   User.currentUsers = await User.previousUsers();
 
   while (true) {
-    printOptions();
-    int validChoice = takeUserChoice();
+    Functions.printOptions();
+    int validChoice = Functions.takeUserChoice();
 
     switch (validChoice) {
       case 1:
@@ -20,7 +20,7 @@ void main() async {
         break;
 
       case 2:
-        int userChoice = SortingOptions();
+        int userChoice = Functions.SortingOptions();
         User.sortAscondition(userChoice);
         User.displayUser();
         break;

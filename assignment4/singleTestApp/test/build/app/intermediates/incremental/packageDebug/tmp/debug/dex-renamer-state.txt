@@ -1,4 +1,0 @@
-#Mon Mar 04 11:17:20 IST 2024
-base.0=/Users/maneesh/mydocs/nuclei-assignment/assignment4/singleTestApp/test/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

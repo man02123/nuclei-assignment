@@ -19,6 +19,11 @@ class User {
       required this.userRollNumber,
       required this.userCources});
 
+  @override
+  String toString() {
+    return 'Name: $userName , UserRollNumber : $userRollNumber ,UserAge : $userAge ';
+  }
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         userName: json['userName'],
@@ -144,8 +149,7 @@ class User {
     int userChoice = Util.validIntegerInput();
     if (userChoice != 1) {
       for (var user in User.currentUsers) {
-        print(user.userName);
-        print(user.userRollNumber);
+        user.toString();
       }
     } else if (userChoice == 2) {
       int rollNo = Util.validIntegerInput();
@@ -159,8 +163,7 @@ class User {
     } else {
       List<User> reversedUsers = User.currentUsers.reversed.toList();
       for (var user in reversedUsers) {
-        print(user.userName);
-        print(user.userRollNumber);
+        user.toString();
       }
     }
   }

@@ -1,11 +1,7 @@
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:test/controller/getx_controller.dart';
 import 'package:test/views/detail_screen/detail_screen.dart';
-import 'package:test/views/new_contact_screen/new_contact.dart';
 import 'package:test/views/search_screen/SearchedItem.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -55,20 +51,6 @@ class ContactScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             )),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: FloatingActionButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddNewContact()));
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: const Icon(Icons.add),
-                        ),
-                      )
                     ],
                   ),
                 ),

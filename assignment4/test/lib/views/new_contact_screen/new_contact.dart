@@ -45,14 +45,7 @@ class AddNewContact extends StatelessWidget {
                   onPressed: () async {
                     String name = nameController.text;
                     String contact = contactController.text;
-
-                    Contact newContact = Contact(
-                        displayName: name,
-                        givenName: name,
-                        phones: [Item(value: contact.toString())]);
-
-                    await controller.addNewContact(newContact);
-                    controller.rxContacts.refresh();
+                    controller.addNewContacthelper(name, contact);
                     print('contact added');
                   },
                   child: const Text('Add contact'),

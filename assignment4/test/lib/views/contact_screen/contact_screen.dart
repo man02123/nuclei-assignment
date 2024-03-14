@@ -6,15 +6,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:test/controller/getx_controller.dart';
 import 'package:test/views/detail_screen/detail_screen.dart';
 import 'package:test/views/new_contact_screen/new_contact.dart';
-
-import '../search_screen/SearchedItem.dart';
+import 'package:test/views/search_screen/SearchedItem.dart';
 
 class ContactScreen extends StatelessWidget {
   ContactScreen({super.key});
   var controller = Get.put(Mycontroller());
+  String value = '';
   @override
   Widget build(BuildContext context) {
-    String value = '';
     final TextEditingController searchController = TextEditingController();
     return FutureBuilder(
         future: controller.getContact(),
@@ -37,19 +36,7 @@ class ContactScreen extends StatelessWidget {
                             suffixIcon: ElevatedButton(
                                 onPressed: () async {
                                   value = searchController.text;
-                                  Future<Iterable<Contact>> contactsFuture =
-                                      controller.queryContact(value);
-
-                                  Iterable<Contact> contacts =
-                                      await contactsFuture;
-
-                                  List<Contact> contact = [];
-                                  controller.query_Contacts.clear();
-                                  for (var currentContact in contacts) {
-                                    controller.query_Contacts
-                                        .add(currentContact);
-                                  }
-
+                                  controller.searcContact(value);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

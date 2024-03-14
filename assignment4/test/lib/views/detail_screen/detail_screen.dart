@@ -3,36 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test/controller/getx_controller.dart';
 
-class ContactDetails extends StatefulWidget {
+class ContactDetails extends StatelessWidget {
   int index;
   ContactDetails({super.key, required this.index});
-
-  @override
-  State<ContactDetails> createState() => _ContactDetailsState(index: index);
-}
-
-class _ContactDetailsState extends State<ContactDetails> {
-  int index;
-  _ContactDetailsState({required this.index});
   final controller = Get.find<Mycontroller>();
-
   TextEditingController nameController = TextEditingController(),
       lastNameController = TextEditingController(),
       contactController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
 
+  @override
+  Widget build(BuildContext context) {
     nameController =
         TextEditingController(text: controller.rxContacts[index].displayName);
     lastNameController = TextEditingController(
         text: controller.rxContacts[index].familyName ?? 'NA');
     contactController = TextEditingController(
         text: controller.rxContacts[index].phones?[0].value);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Contact Details'),
@@ -95,7 +81,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                   controller.rxContacts[index].phones?[0].value = contactVal;
                   controller.rxContacts[index].familyName = lastName;
                   controller.rxContacts.refresh();
-                  controller.updateContact(controller.rxContacts[index]);
+                  controller.updateContact(contact);
                 },
                 style: const ButtonStyle(
                   alignment: AlignmentDirectional.center,
@@ -105,5 +91,6 @@ class _ContactDetailsState extends State<ContactDetails> {
             ),
           ]),
         ));
+    ;
   }
 }

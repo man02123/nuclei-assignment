@@ -20,6 +20,16 @@ class Mycontroller extends GetxController {
     await ContactsService.updateContact(contact);
   }
 
+  Future<void> addNewContacthelper(String? name, String? contact) async {
+    Contact newContact = Contact(
+        displayName: name,
+        givenName: name,
+        phones: [Item(value: contact.toString())]);
+
+    await addNewContact(newContact);
+    rxContacts.refresh();
+  }
+
   Future<void> addNewContact(Contact newContact) async {
     rxContacts.add(newContact);
     await ContactsService.addContact(newContact);
@@ -39,5 +49,17 @@ class Mycontroller extends GetxController {
     await ContactsService.deleteContact(rxContacts[index]);
     rxContacts.remove(rxContacts[index]);
     rxContacts.refresh();
+  }
+
+  Future<void> searcContact(String? value) async {
+    Future<Iterable<Contact>> contactsFuture = queryContact(value);
+
+    Iterable<Contact> contacts = await contactsFuture;
+
+    List<Contact> contact = [];
+    query_Contacts.clear();
+    for (var currentContact in contacts) {
+      query_Contacts.add(currentContact);
+    }
   }
 }

@@ -1,23 +1,13 @@
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:test/controller/getx_controller.dart';
+import 'package:test/views/detail_screen/detail_screen.dart';
 
-import '../../controller/getx_controller.dart';
-import '../detail_screen/detail_screen.dart';
-
-class SearchedItem extends StatefulWidget {
+class SearchedItem extends StatelessWidget {
   List<Contact> contacts;
   SearchedItem({super.key, required this.contacts});
-
-  @override
-  State<SearchedItem> createState() => _SearchedItemState();
-}
-
-class _SearchedItemState extends State<SearchedItem> {
   final controller = Get.find<Mycontroller>();
-  _SearchedItemState();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +24,6 @@ class _SearchedItemState extends State<SearchedItem> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      //print('${controller.query_Contacts.length}');
-
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           int contactIndex = 0;
@@ -49,15 +37,12 @@ class _SearchedItemState extends State<SearchedItem> {
                           return ContactDetails(index: contactIndex);
                         },
                       ));
-
-                      //print('tapped');
                     },
                     child: ListTile(
                       trailing: Container(
                         child: ElevatedButton(
                           onPressed: () {
                             int contactIndex = 0;
-                            //( set)
                             for (var contact in controller.rxContacts) {
                               if (contact.identifier ==
                                   controller.query_Contacts[index].identifier) {
@@ -70,7 +55,7 @@ class _SearchedItemState extends State<SearchedItem> {
 
                             controller.deleteContact(contactIndex);
                           },
-                          child: Icon(Icons.delete),
+                          child: const Icon(Icons.delete),
                         ),
                       ),
                       leading: Container(
@@ -100,8 +85,8 @@ class _SearchedItemState extends State<SearchedItem> {
                       title: Text(
                         controller.query_Contacts[index].displayName ??
                             "no name",
-                        maxLines: 1, // overflow na ho jaye line ka
-                        overflow: TextOverflow.ellipsis, // pata ni kya karta h
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontFamily: 'italic',
                             fontSize: 25,
@@ -123,5 +108,6 @@ class _SearchedItemState extends State<SearchedItem> {
                 }),
           ),
         ])));
+    ;
   }
 }

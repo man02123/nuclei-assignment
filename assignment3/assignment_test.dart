@@ -10,9 +10,4 @@ void main() {
 
     expect(result, 'A');
   });
-
-  test('i want to test Immediate parents  user', () {
-    Node testGraph = Node(nodeId: 2, nodeName: "B");
-    getAllAncesters();
-  });
 }

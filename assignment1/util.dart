@@ -64,11 +64,4 @@ class Util {
       }
     }
   }
-
-  static void showPreviousItems() {
-    // showing the previous inputs
-    for (int i = 0; i < Item.currentItems.length; i++) {
-      print('${Item.currentItems[i].toString()}');
-    }
-  }
 }

@@ -8,20 +8,11 @@ import 'package:test/views/home_screen/home.dart';
 import 'package:go_router/go_router.dart';
 
 void main() async {
-  runApp(const MyApp2());
+  runApp(const MyApp());
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(home: HomePage());
-//   }
-// }
-
-class MyApp2 extends StatelessWidget {
-  const MyApp2({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
